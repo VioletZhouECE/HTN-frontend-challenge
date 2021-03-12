@@ -18,9 +18,13 @@
   "homepage": "https://github.com/VioletZhouECE/HTN-frontend-challenge#readme",
   "dependencies": {
     "bootstrap": "4.3.1",
+    "bootstrap-form": "^1.0.1",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.6.0",
     "react": "16.8.4",
     "react-dom": "16.8.4",
-    "react-router-dom": "5.0.0"
+    "react-router-dom": "5.0.0",
+    "url-loader": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",

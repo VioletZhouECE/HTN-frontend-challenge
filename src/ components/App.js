@@ -2,8 +2,9 @@ import React from "react";
 import Login from "./auth/Login";
 import Home from "./home/Home";
 
-class App extends React.component {
+class App extends React.Component {
     constructor(props) {
+        super(props);
         this.state = {
             isLogin: false,
             userInfo: {
@@ -50,7 +51,7 @@ class App extends React.component {
 
     render() {
         return (
-            this.state.isLogin ? <Login loginHandler={loginHandler}></Login> : <Home userInfo={userInfo} logoutHandler={logoutHandler}></Home>
+            this.state.isLogin ? <Login loginHandler={this.loginHandler}></Login> : <Home userInfo={this.state.userInfo} logoutHandler={this.logoutHandler}></Home>
         );
     }
 }

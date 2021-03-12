@@ -1,6 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
+import App from "./ components/App";
 
-const HelloWorld = () => <h1>Hello World</h1>
-
-render(<HelloWorld></HelloWorld>, document.getElementById("app"));
+render(<App></App>, document.getElementById("app"));
