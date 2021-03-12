@@ -1,5 +1,6 @@
 import React from "react";
-import "../../css/login.css"
+import "../../css/login.css";
+import LoginImage from "../../image/HTN_login.png"
 
 class Login extends React.Component {
     constructor(props){
@@ -41,7 +42,10 @@ class Login extends React.Component {
 
     render(){
         return(
-            <div className='login-background'> 
+            <div className='login-background d-flex'> 
+            <div className="py-4">
+                <img src={LoginImage}></img>
+            </div>
             <div className='login-container login-container-border pt-4'>
                 <div className='center'>
                     <div className='text-center'>
@@ -63,7 +67,7 @@ class Login extends React.Component {
                             </div>
                         </div>
                         <div className="d-flex justify-content-center">
-                            <button type="submit" className="btn btn-primary">Log in</button>
+                            <button type="submit" className="btn btn-warning">Log in</button>
                         </div>
                     </form>
                 </div>
