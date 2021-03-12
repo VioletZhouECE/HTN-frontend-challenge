@@ -42,13 +42,13 @@ class Login extends React.Component {
 
     render(){
         return(
-            <div className='login-background d-flex'> 
-            <div className="py-4">
+            <div className='login-background d-flex justify-content-between flex-wrap'> 
+            <div className="HTN-image-container">
                 <img src={LoginImage}></img>
             </div>
-            <div className='login-container login-container-border pt-4'>
+            <div className='login-container login-container-border pt-5'>
                 <div className='center'>
-                    <div className='text-center'>
+                    <div className='text-center login-text'>
                         <h2>Login</h2>
                     </div>
                     <form id="form-validation" onSubmit={e=>this.handleSubmit(e)} noValidate>
@@ -68,6 +68,9 @@ class Login extends React.Component {
                         </div>
                         <div className="d-flex justify-content-center">
                             <button type="submit" className="btn btn-warning">Log in</button>
+                        </div>
+                        <div className="d-flex justify-content-center pt-4">
+                            <a>Continue without login</a>
                         </div>
                     </form>
                 </div>

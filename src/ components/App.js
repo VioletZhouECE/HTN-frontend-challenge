@@ -1,6 +1,8 @@
 import React from "react";
+import {Switch, Route} from "react-router-dom";
 import Login from "./auth/Login";
 import Home from "./home/Home";
+import PageNotFound from "./PageNotFound";
 
 class App extends React.Component {
     constructor(props) {
@@ -51,7 +53,11 @@ class App extends React.Component {
 
     render() {
         return (
-            this.state.isLogin ? <Login loginHandler={this.loginHandler}></Login> : <Home userInfo={this.state.userInfo} logoutHandler={this.logoutHandler}></Home>
+            <Switch>
+                <Route path="/login" render = {(props)=><Login loginHandler={this.loginHandler}></Login>}></Route>
+                <Route exact path="/" render = {(props)=><Home userInfo={this.state.userInfo} logoutHandler={this.logoutHandler}></Home>}></Route>
+                <Route component={PageNotFound}></Route>
+            </Switch>
         );
     }
 }

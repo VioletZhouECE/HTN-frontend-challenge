@@ -5,6 +5,11 @@
     background-color:#fafafa;
 }
 
+.HTN-image-container{
+    width: 450px;
+    margin: auto;
+}
+
 .login-background {
     background-color: rgba(254,244,234,255);
     height: 100%
