@@ -6,4 +6,4 @@ import "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./css/common.css";
 
-render(<Router><App></App></Router>, document.getElementById("app"));
+render(<Router><App></App></Router>, document.getElementById("root"));

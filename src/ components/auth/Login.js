@@ -1,6 +1,7 @@
 import React from "react";
 import "../../css/login.css";
 import LoginImage from "../../image/HTN_login.png"
+import { withRouter } from "react-router";
 
 class Login extends React.Component {
     constructor(props){
@@ -37,7 +38,7 @@ class Login extends React.Component {
             return;
         }
         
-        this.props.handleSubmitForm(this.state);
+        this.props.loginHandler(this.state);
     }
 
     render(){
@@ -67,10 +68,10 @@ class Login extends React.Component {
                             </div>
                         </div>
                         <div className="d-flex justify-content-center">
-                            <button type="submit" className="btn btn-warning">Log in</button>
+                            <button type="submit" className="btn btn-warning" onClick={this.handleSubmit}>Log in</button>
                         </div>
                         <div className="d-flex justify-content-center pt-4">
-                            <a>Continue without login</a>
+                            <a href="/">Continue without login</a>
                         </div>
                     </form>
                 </div>
@@ -80,4 +81,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

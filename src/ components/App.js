@@ -1,18 +1,18 @@
 import React from "react";
 import {Switch, Route} from "react-router-dom";
+import { withRouter } from "react-router";
 import Login from "./auth/Login";
 import Home from "./home/Home";
 import PageNotFound from "./PageNotFound";
+import userInfo from "../../config/userinfo";
+import displayErrorMessage from "../scripts/displayMessages";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLogin: false,
-            userInfo: {
-                username: null,
-                permission: null
-            }
+            isLoggedin: false,
+            username: null
         }
 
         this.loginHandler = this.loginHandler.bind(this);
@@ -20,46 +20,42 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        //log in if the token exists
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("isLoggedin")) {
             const username = localStorage.getItem("username");
-            const permission = localStorage.getItem("permission");
-            this.setState({ isLogin: true });
-            this.setState((prevState) => {
-                return {
-                    userInfo: { ...prevState.userInfo, username: username, permission: permission }
-                }
-            });
+            this.setState({ isLoggedin: true, username: username });
         }
     }
 
-    loginHandler({token, userInfo}){
-        localStorage.setItem("token", token);
-        localStorage.setItem("username", userInfo.username);
-        localStorage.setItem("permission", userInfo.permission);
+    loginHandler({username, password}){
+        if (userInfo[username] && userInfo[username] == password){
+            //login successfully
+            localStorage.setItem("isLoggedin", "true");
+            localStorage.setItem("username", username);
+            this.setState({ isLoggedin: true, username: username });
+            this.props.history.replace('/');
+        } else {
+            displayErrorMessage("wrong username or password");
+        }
     }
 
     logoutHandler(){
-        localStorage.removeItem("token");
+        localStorage.removeItem("isLoggedin");
         localStorage.removeItem("username");
-        localStorage.removeItem("permission");
-        this.setState({ isLogin: false });
-        this.setState((prevState) => {
-            return {
-                userInfo: { ...prevState.userInfo, username: null, permission: null }
-            }
-        });
+        this.setState({ isLoggedin: false, username: null });
     }
 
     render() {
         return (
-            <Switch>
-                <Route path="/login" render = {(props)=><Login loginHandler={this.loginHandler}></Login>}></Route>
-                <Route exact path="/" render = {(props)=><Home userInfo={this.state.userInfo} logoutHandler={this.logoutHandler}></Home>}></Route>
-                <Route component={PageNotFound}></Route>
-            </Switch>
+            <div id="app">
+                <div id = "error_message" className = "alert alert-danger toast-message"></div>
+                <Switch>
+                    <Route path="/login" render = {(props)=><Login loginHandler={this.loginHandler}></Login>}></Route>
+                    <Route exact path="/" render = {(props)=><Home isLoggedin = {this.state.isLoggedin} username={this.state.username} logoutHandler={this.logoutHandler}></Home>}></Route>
+                    <Route component={PageNotFound}></Route>
+                </Switch>
+            </div>
         );
     }
 }
 
-export default App;
+export default withRouter(App);

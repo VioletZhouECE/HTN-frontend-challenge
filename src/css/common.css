@@ -7,6 +7,15 @@
     color: #495057;
 } 
 
-html, body, #app {
+html, body, #root, #app{
     height: 100%;
+}
+
+#error_message {
+    float: right;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: none;
 }
