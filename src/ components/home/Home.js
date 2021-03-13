@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import Events from "./Events";
 
 class Home extends React.Component{
     constructor(props){
@@ -19,6 +20,7 @@ class Home extends React.Component{
                         {this.props.isLoggedin? <a href="/" onClick={this.props.logoutHandler}>logout</a>: <Link to="/login">login</Link>}
                     </form>
                 </nav>
+                <Events isLoggedin = {this.props.isLoggedin}></Events>
             </div>
         )
     }
