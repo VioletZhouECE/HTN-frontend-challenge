@@ -40,12 +40,15 @@ class Events extends React.Component {
                 const speakers = event.speakers.map(speaker => speaker.name);
                 return {
                     "name": event.name,
-                    "start_time": convertToDatetime(event.start_time),
-                    "end_time": convertToTime(event.end_time),
+                    "start_time": event.start_time,
+                    "end_time": event.end_time,
                     "speakers": speakers
                 }
             }
             );
+
+            //sort events by start_time
+            displayedEvents = displayedEvents.sort((a,b)=>a.start_time-b.start_time);
 
             this.setState({ events: displayedEvents });
         })
@@ -57,7 +60,7 @@ class Events extends React.Component {
 
     render() {
         const events = this.state.events.map(event => {
-            return <Event key={event.id} name={event.name} startTime={event.start_time} endTime={event.end_time} speakers={event.speakers}></Event>
+            return <Event key={event.id} name={event.name} startTime={convertToDatetime(event.start_time)} endTime={convertToTime(event.end_time)} speakers={event.speakers}></Event>
         });
 
         return (
