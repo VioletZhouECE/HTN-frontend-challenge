@@ -43,12 +43,12 @@ class Login extends React.Component {
 
     render(){
         return(
-            <div className='login-background d-flex justify-content-between flex-wrap'> 
+            <div className='HTN-background d-flex justify-content-between flex-wrap'> 
             <div className="HTN-image-container">
                 <img src={LoginImage}></img>
             </div>
             <div className='login-container login-container-border pt-5'>
-                <div className='center'>
+                <div className='login-center'>
                     <div className='text-center login-text'>
                         <h2>Login</h2>
                     </div>

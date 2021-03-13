@@ -10,18 +10,13 @@
     margin: auto;
 }
 
-.login-background {
-    background-color: rgba(254,244,234,255);
-    height: 100%
-}
-
 .login-container-border {
     -webkit-box-shadow: 7px 7px 5px 0px rgb(165, 113, 44);
     -moz-box-shadow: 7px 7px 5px 0px rgb(165, 113, 44);
     box-shadow: 7px 7px 5px 0px rgb(165, 113, 44);
 }
 
-.center {
+.login-center {
     width: 60%; 
     margin: auto;
 }

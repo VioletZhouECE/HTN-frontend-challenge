@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Events from "./Events";
+import "../../css/home.css"
 
 class Home extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class Home extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="HTN-background">
                 <nav className="navbar navbar-light bg-light justify-content-between">
                     <a className="navbar-brand">Hacker events</a>
                     <form className="form-inline">
