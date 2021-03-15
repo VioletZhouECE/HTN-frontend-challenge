@@ -39,9 +39,11 @@ class Events extends React.Component {
             displayedEvents = displayedEvents.map(event => {
                 const speakers = event.speakers.map(speaker => speaker.name);
                 return {
+                    "id": event.id,
                     "name": event.name,
-                    "start_time": event.start_time,
-                    "end_time": event.end_time,
+                    "startTime": event.start_time,
+                    "endTime": event.end_time,
+                    "description": event.description,
                     "speakers": speakers
                 }
             }
@@ -60,7 +62,7 @@ class Events extends React.Component {
 
     render() {
         const events = this.state.events.map(event => {
-            return <Event key={event.id} name={event.name} startTime={convertToDatetime(event.start_time)} endTime={convertToTime(event.end_time)} speakers={event.speakers}></Event>
+            return <Event key={event.id} event={{...event, startTime:convertToDatetime(event.startTime), endTime:convertToTime(event.endTime)}}></Event>
         });
 
         return (
