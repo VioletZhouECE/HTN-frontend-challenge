@@ -12,7 +12,7 @@ class Event extends React.Component{
         //collapse the event details
         $(`#collapse${eventId}`).collapse('show');
         //scroll to the related event
-        document.getElementById("event"+eventId).scrollIntoView(true, {behavior: "smooth"});
+        document.getElementById("event"+eventId).scrollIntoView({behavior: "smooth", block: "center"});
     }
 
     //display name, event time, speakers
@@ -22,15 +22,15 @@ class Event extends React.Component{
             let event;
             if (i>0){
                 //split hyperlinks by comma
-                event = <a href="javascript:void(0)" onClick={()=>this.scrollToRelatedEvent(this.props.event.relatedEventIds[i])}>, {this.props.event.relatedEventNames[i]}</a>
+                event = <a key={this.props.event.relatedEventIds[i]} href="javascript:void(0)" onClick={()=>this.scrollToRelatedEvent(this.props.event.relatedEventIds[i])}>, {this.props.event.relatedEventNames[i]}</a>
             } else {
-                event = <a href="javascript:void(0)" onClick={()=>this.scrollToRelatedEvent(this.props.event.relatedEventIds[i])}>{this.props.event.relatedEventNames[i]}</a>
+                event = <a key={this.props.event.relatedEventIds[i]} href="javascript:void(0)" onClick={()=>this.scrollToRelatedEvent(this.props.event.relatedEventIds[i])}>{this.props.event.relatedEventNames[i]}</a>
             }
             relatedEvents.push(event);
         }
 
         return (
-            <div id={`event${this.props.event.id}`} className="event-container center d-flex flex-column flex-nowrap mb-3">
+            <div id={`event${this.props.event.id}`} className="event-container center d-flex flex-column flex-nowrap mt-3">
                 <div className="d-flex">
                     <div className="col-sm-6 col-md-6 col-lg-6">{this.props.event.name}</div>
                     <div className="col-sm-6 col-md-6 col-lg-6">{this.props.event.startTime} - {this.props.endTime}</div>
