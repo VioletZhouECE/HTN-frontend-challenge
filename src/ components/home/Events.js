@@ -58,13 +58,15 @@ class Events extends React.Component {
                 //get event names from ids
                 displayedEvents = displayedEvents.map(event=>{
                     const eventNames = [];
+                    const eventIds = [];
                     event.relatedEventIds.forEach(eventId=>{
                        //Note: we need to filter undefined here - which are the events that guest users do not have permission to view
                        if (eventMapping[eventId]){
                            eventNames.push(eventMapping[eventId]);
+                           eventIds.push(eventId);
                        }
                     })
-                    return {...event, relatedEventNames: eventNames}
+                    return {...event, relatedEventNames: eventNames, relatedEventIds: eventIds}
                 });
 
                 //sort events by start_time
