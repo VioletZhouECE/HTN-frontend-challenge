@@ -1,5 +1,5 @@
 import React from "react";
-import {convertToDatetime, convertToTime} from "../../scripts/dateConversion"
+import { convertToDatetime, convertToTime } from "../../scripts/dateConversion"
 import displayErrorMessage from "../../scripts/displayMessages";
 import Event from "./Event";
 
@@ -22,51 +22,69 @@ class Events extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(({ data }) => {
-            const eventsData = data.events;
+            .then(res => res.json())
+            .then(({ data }) => {
+                const eventsData = data.events;
 
 
-            let displayedEvents = [];
-            //filter private events if the user is not logged in
-            if (!this.props.isLoggedin) {
-                displayedEvents = eventsData.filter((event) => event.permission == "public");
-            } else {
-                displayedEvents = eventsData;
-            }
-
-            //extract necessary fields from displayedEvents
-            displayedEvents = displayedEvents.map(event => {
-                const speakers = event.speakers.map(speaker => speaker.name);
-                return {
-                    "id": event.id,
-                    "name": event.name,
-                    "startTime": event.start_time,
-                    "endTime": event.end_time,
-                    "description": event.description,
-                    "speakers": speakers
+                let displayedEvents = [];
+                //filter private events if the user is not logged in
+                if (!this.props.isLoggedin) {
+                    displayedEvents = eventsData.filter((event) => event.permission == "public");
+                } else {
+                    displayedEvents = eventsData;
                 }
-            }
-            );
 
-            //sort events by start_time
-            displayedEvents = displayedEvents.sort((a,b)=>a.start_time-b.start_time);
+                //extract necessary fields from displayedEvents 
+                //and construct the event {eventId: name} mapping
+                let eventMapping = {};
+                displayedEvents = displayedEvents.map(event => {
+                    const speakers = event.speakers.map(speaker => speaker.name);
+                    eventMapping[event.id] = event.name;
 
-            this.setState({ events: displayedEvents });
-        })
-        .catch((err) => {
-            displayErrorMessage("Oops, cannot fetch events info. Please try again later");
-            console.log(err);
-        })
+                    return {
+                        "id": event.id,
+                        "name": event.name,
+                        "startTime": event.start_time,
+                        "endTime": event.end_time,
+                        "description": event.description,
+                        "url": this.props.isLoggedin ? this.props.private_url : this.props.public_url,
+                        "relatedEventIds": event.related_events,
+                        "speakers": speakers
+                    }
+                }
+                );
+
+                //get event names from ids
+                displayedEvents = displayedEvents.map(event=>{
+                    const eventNames = [];
+                    event.relatedEventIds.forEach(eventId=>{
+                       //Note: we need to filter undefined here - which are the events that guest users do not have permission to view
+                       if (eventMapping[eventId]){
+                           eventNames.push(eventMapping[eventId]);
+                       }
+                    })
+                    return {...event, relatedEventNames: eventNames}
+                });
+
+                //sort events by start_time
+                displayedEvents = displayedEvents.sort((a, b) => a.start_time - b.start_time);
+
+                this.setState({ events: displayedEvents });
+            })
+            .catch((err) => {
+                displayErrorMessage("Oops, cannot fetch events info. Please try again later");
+                console.log(err);
+            })
     }
 
     render() {
         const events = this.state.events.map(event => {
-            return <Event key={event.id} event={{...event, startTime:convertToDatetime(event.startTime), endTime:convertToTime(event.endTime)}}></Event>
+            return <Event key={event.id} event={{ ...event, startTime: convertToDatetime(event.startTime), endTime: convertToTime(event.endTime) }}></Event>
         });
 
         return (
-            <div>
+            <div id="accordion">
                 {events}
             </div>
         )

@@ -8,7 +8,7 @@ class Event extends React.Component{
     //display name, event time, speakers
     render(){
         return (
-            <div className="event-container center d-flex flex-column flex-nowrap mb-3">
+            <div id={this.props.event.id} className="event-container center d-flex flex-column flex-nowrap mb-3">
                 <div className="d-flex">
                     <div className="col-sm-6 col-md-6 col-lg-6">{this.props.event.name}</div>
                     <div className="col-sm-6 col-md-6 col-lg-6">{this.props.event.startTime} - {this.props.endTime}</div>
@@ -19,9 +19,10 @@ class Event extends React.Component{
                         <a data-toggle="collapse" href={`#collapse${this.props.event.id}`} role="button" aria-expanded="false" aria-controls={`collapse${this.props.event.id}`}>View details</a>
                     </div>
                 </div>
-                <div className="collapse" id={`collapse${this.props.event.id}`}>
+                <div className="collapse" id={`collapse${this.props.event.id}`} data-parent="#accordion">
                     <div className="card card-body">
-                        {this.props.event.description}
+                        <p>{this.props.event.description}</p>
+                        <p style={{display: this.props.event.relatedEventNames? "inline":"none"}}>Related events: {this.props.event.relatedEventNames.toString()}</p>
                     </div>
                 </div>
             </div>
