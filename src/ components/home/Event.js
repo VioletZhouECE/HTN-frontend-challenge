@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery";
 
 class Event extends React.Component{
     constructor(props){
@@ -8,9 +9,10 @@ class Event extends React.Component{
     }
 
     scrollToRelatedEvent(eventId){
-        //scroll to the related event
-        document.getElementById("event"+eventId).scrollIntoView({behavior: 'smooth'});
         //collapse the event details
+        $(`#collapse${eventId}`).collapse('show');
+        //scroll to the related event
+        document.getElementById("event"+eventId).scrollIntoView(true, {behavior: "smooth"});
     }
 
     //display name, event time, speakers
