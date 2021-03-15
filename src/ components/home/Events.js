@@ -48,7 +48,7 @@ class Events extends React.Component {
                         "startTime": event.start_time,
                         "endTime": event.end_time,
                         "description": event.description,
-                        "url": this.props.isLoggedin ? this.props.private_url : this.props.public_url,
+                        "url": this.props.isLoggedin ? event.private_url : event.public_url,
                         "relatedEventIds": event.related_events,
                         "speakers": speakers
                     }

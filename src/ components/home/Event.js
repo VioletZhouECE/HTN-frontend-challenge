@@ -22,6 +22,7 @@ class Event extends React.Component{
                 <div className="collapse" id={`collapse${this.props.event.id}`} data-parent="#accordion">
                     <div className="card card-body">
                         <p>{this.props.event.description}</p>
+                        <p>Event link: <a href={`${this.props.event.url}`} style={{display: this.props.event.url?"inline":"none"}}>{this.props.event.url}</a></p>
                         <p style={{display: this.props.event.relatedEventNames? "inline":"none"}}>Related events: {this.props.event.relatedEventNames.toString()}</p>
                     </div>
                 </div>
