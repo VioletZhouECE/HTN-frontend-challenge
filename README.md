@@ -27,11 +27,11 @@ After designing the data flow and the key components: App, Home, Events, Event, 
 Yes! I encountered a very interesting bug while linking an event to its related events. I found that some of the events are linked to an event that does not exist on the page (the event id does not exist).
 It turns out that this was because when filtering the events based on user's permission, I only filtered the events themselves, but not the related events in the nested array. An additional filtering of the nested array solves the issue.
 
-# Is there something that you are very proud of?
+# Is there something that I am very proud of?
 Yes! I am very happy about my code - my code is clean, well-structured and well-commented (I have definitely improved the code quality since my last frontend project:). Also, I am happy about implementing the functionality to scroll to the related event and collapse
 the hidden menu. That looks kinda cool.
 
-# Is there anything that you are not happy about?
+# Is there anything that I am not very happy about?
 Yes! I am really interested in the project and would really want to spend more time implementing the other functionalities and add more styling to the site, 
 but I had a lot of deliverables recently and only had the time to implement the basic functionalities, so here I will talk about how I plan to implement the other functionalities (maybe I will actually implement them in the future haha):
 1. Search: since we don't have a lot of text to search from (yet), we can implement the search ourselves without using a plugin. We can associate the search bar text with a state in the Home component. Every time the user types in the search bar, we will update the state and pass the new state as a props to the Events component. This will trigger a function that filters the events array by search bar text. 
