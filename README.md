@@ -4,7 +4,15 @@ Hack the North organizer application frontend coding challenge.
 # How to run the app
 1. npm install
 2. npm start
-2. go to localhost:3000. The site is up and running there!
+3. go to localhost:3000. The site is up and running there!
+
+# Login credentials
+The login credentials are hard-coded. You can find them in config/userinfo.js. You can use the following credentials to login (the login button is at the top right corner:)
+```
+Violet: 123456
+testuser1: 112233
+testuser2: 654321
+```
 
 # Tech stack
 * HTML/CSS/bootstrap
